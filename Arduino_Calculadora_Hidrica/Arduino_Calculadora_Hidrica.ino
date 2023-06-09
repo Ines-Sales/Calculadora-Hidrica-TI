@@ -64,7 +64,7 @@ void loop() {
   float distance = duration * 0.034 / 2;
 
   Serial.println(distance);
-  delay(700);
+  delay(900);
 
    
   if (Serial.available()) {

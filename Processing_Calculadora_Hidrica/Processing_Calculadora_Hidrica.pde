@@ -17,7 +17,7 @@ float multiplicadorLoica=0;
 float multiplicadorRoupa=0;
 PFont fonte;
 float numeropainel=1;
-int pontuacao=0;
+int pontuacao=0, pontuacaoMomentanea=0;
 float multiplicador=1;
 int rectxPrevious=0;
 myButton[] buttons;
@@ -107,140 +107,156 @@ void draw() {
 
       if ((totalTime >= 5000)) {
 
-        // 1 pergunta
-        if (numeropainel == 2) {
-          if (rectx==240) {
-            multiplicadorPessoas=2.5;
-            arduino.write('5');
-          } else if (rectx==450) {
-            multiplicadorPessoas=4.5;
-            arduino.write('5');
-          } else if (rectx==700) {
-            multiplicadorPessoas=6;
-            arduino.write('5');
-          } else if (rectx==900) {
-            multiplicadorPessoas=1;
-            arduino.write('5');
-          }
-          counter=0;
-          arduino.write('0');
+      // 1 pergunta
+      if (numeropainel == 2) {
+        if (rectx==240) {
+          multiplicadorPessoas=2.5;
+          arduino.write('5');
+        } else if (rectx==450) {
+          multiplicadorPessoas=4.5;
+          arduino.write('5');
+        } else if (rectx==700) {
+          multiplicadorPessoas=6;
+          arduino.write('5');
+        } else if (rectx==900) {
+          multiplicadorPessoas=1;
+          arduino.write('5');
         }
-        // 2 pergunta
-        if (numeropainel == 3) {
+        counter=0;
+        pontuacaoMomentanea=0;
+        arduino.write('0');
 
-          if (rectx==240) {
-            multiplicadorDuche=1.5;
-            arduino.write('5');
-          } else if (rectx==450) {
-            multiplicadorDuche=3.5;
-            arduino.write('5');
-          } else if (rectx==700) {
-            multiplicadorDuche=5.5;
-            arduino.write('5');
-          } else if (rectx==900) {
-            multiplicadorDuche=7.5;
-            arduino.write('5');
-          }
-          counter=0;
-          arduino.write('0');
+      }
+      // 2 pergunta
+      if (numeropainel == 3) {
+        
+        if (rectx==240) {
+          multiplicadorDuche=1.5;
+          arduino.write('5');
+        } else if (rectx==450) {
+          multiplicadorDuche=3.5;
+          arduino.write('5');
+        } else if (rectx==700) {
+          multiplicadorDuche=5.5;
+          arduino.write('5');
+        } else if (rectx==900) {
+          multiplicadorDuche=7.5;
+          arduino.write('5');
         }
-
-
-        // 3 pergunta
-        if (numeropainel == 4) {
-          if (rectx==240) {
-            pontuacao = int((20*multiplicadorDuche)/7);
-            arduino.write('5');
-          } else if (rectx==450) {
-            pontuacao =  int((40*multiplicadorDuche)/7);
-            arduino.write('5');
-          } else if (rectx==700) {
-            pontuacao =  int((65*multiplicadorDuche)/7);
-            arduino.write('5');
-          } else if (rectx==900) {
-            pontuacao =  int((75*multiplicadorDuche)/7);
-            arduino.write('5');
-          }
-          counter=0;
-          arduino.write('0');
+        counter=0;
+        pontuacaoMomentanea=0;
+        arduino.write('0');
+      }
+    
+    
+      // 3 pergunta
+      if (numeropainel == 4) {
+        if (rectx==240) {
+          pontuacao = int((20*multiplicadorDuche)/7);
+          arduino.write('5');
+        } else if (rectx==450) {
+          pontuacao =  int((40*multiplicadorDuche)/7);
+          arduino.write('5');
+        } else if (rectx==700) {
+          pontuacao =  int((65*multiplicadorDuche)/7);
+          arduino.write('5');
+        } else if (rectx==900) {
+          pontuacao =  int((75*multiplicadorDuche)/7);
+          arduino.write('5');
         }
-
-        // 4 pergunta
-        if (numeropainel == 5) {
-          if (rectx==240) {
-            pontuacao = int(pontuacao + (1283 * 0));
-            arduino.write('5');
-          } else if (rectx==450) {
-            pontuacao =  int(pontuacao + (1283 * 1.5));
-            arduino.write('5');
-          } else if (rectx==700) {
-            pontuacao =  int(pontuacao + (1283 * 3.5));
-            arduino.write('5');
-          } else if (rectx==900) {
-            pontuacao =  int(pontuacao + (1283 * 6));
-            arduino.write('5');
-          }
-          counter=0;
-          arduino.write('0');
+        counter=0;
+        pontuacaoMomentanea=pontuacao;
+        arduino.write('0');
+      }
+      
+      // 4 pergunta
+      if (numeropainel == 5) {
+        if (rectx==240) {
+          pontuacaoMomentanea = int(1283 * 0);
+          pontuacao = pontuacao + pontuacaoMomentanea;
+          arduino.write('5');
+        } else if (rectx==450) {
+          pontuacaoMomentanea = int(1283 * 1.5);
+          pontuacao = pontuacao + pontuacaoMomentanea;
+          arduino.write('5');
+        } else if (rectx==700) {
+          pontuacaoMomentanea = int(1283 * 1.5);
+          pontuacao = pontuacao + pontuacaoMomentanea;
+          arduino.write('5');
+        } else if (rectx==900) {
+          pontuacaoMomentanea =  int(1283 * 6);
+          pontuacao = pontuacao + pontuacaoMomentanea;
+          arduino.write('5');
         }
-
-        // 5 pergunta
-        if (numeropainel == 6) {
-          if (rectx==240) {
-            multiplicadorLoica = 27;
-            arduino.write('5');
-          } else if (rectx==450) {
-            multiplicadorLoica = 15;
-            arduino.write('5');
-          }
-          counter=0;
-          arduino.write('0');
+        counter=0;
+        arduino.write('0');
+      }
+      
+      // 5 pergunta
+      if (numeropainel == 6) {
+        if (rectx==240) {
+          multiplicadorLoica = 27;
+          arduino.write('5');
+        } else if (rectx==450) {
+          multiplicadorLoica = 15;
+          arduino.write('5');
+        } 
+        counter=0;
+        pontuacaoMomentanea=0;
+        arduino.write('0');
+      }
+      
+      // 6 pergunta
+      if (numeropainel == 7) {
+        if (rectx==240) {
+          pontuacaoMomentanea = int((1*multiplicadorLoica)/7);
+          pontuacao = pontuacao + pontuacaoMomentanea;
+          arduino.write('5');
+        } else if (rectx==450) {
+          pontuacaoMomentanea = int((2.5*multiplicadorLoica)/7);
+          pontuacao = pontuacao + pontuacaoMomentanea;
+          arduino.write('5');
+        } else if (rectx==700) {
+          pontuacaoMomentanea = int((4*multiplicadorLoica)/7);
+          pontuacao = pontuacao + pontuacaoMomentanea;
+          arduino.write('5');
+        } 
+        counter=0;
+        arduino.write('0');
+      }
+      
+      // 7 pergunta
+      if (numeropainel == 8) {
+        if (rectx==240) {
+          multiplicadorRoupa = 25;
+          arduino.write('5');
+        } else if (rectx==450) {
+          multiplicadorRoupa = 41;
+          arduino.write('5');
         }
-
-        // 6 pergunta
-        if (numeropainel == 7) {
-          if (rectx==240) {
-            pontuacao = int(pontuacao+((1*multiplicadorLoica)/7));
-            arduino.write('5');
-          } else if (rectx==450) {
-            pontuacao = int(pontuacao+((2.5*multiplicadorLoica)/7));
-            arduino.write('5');
-          } else if (rectx==700) {
-            pontuacao = int(pontuacao+((4*multiplicadorLoica)/7));
-            arduino.write('5');
-          }
-          counter=0;
-          arduino.write('0');
-        }
-
-        // 7 pergunta
-        if (numeropainel == 8) {
-          if (rectx==240) {
-            multiplicadorRoupa = 25;
-            arduino.write('5');
-          } else if (rectx==450) {
-            multiplicadorRoupa = 41;
-            arduino.write('5');
-          }
-          counter=0;
-          arduino.write('0');
-        }
-
-        // 8 pergunta
-        if (numeropainel == 9) {
-          if (rectx==240) {
-            pontuacao =  int(pontuacao+((1*multiplicadorRoupa)/7));
-            arduino.write('5');
-          } else if (rectx==450) {
-            pontuacao =  int(pontuacao+((2.5*multiplicadorRoupa)/7));
-            arduino.write('5');
-          } else if (rectx==700) {
-            pontuacao =  int(pontuacao+((4*multiplicadorRoupa)/7));
-            arduino.write('5');
-          }
-          counter=0;
-          arduino.write('0');
-        }
+        counter=0;
+        pontuacaoMomentanea=0;
+        arduino.write('0');
+      }
+      
+      // 8 pergunta
+      if (numeropainel == 9) {
+        if (rectx==240) {
+          pontuacaoMomentanea =  int((1*multiplicadorRoupa)/7);
+          pontuacao = pontuacao + pontuacaoMomentanea;
+          arduino.write('5');
+        } else if (rectx==450) {
+          pontuacaoMomentanea =  int((2.5*multiplicadorRoupa)/7);
+          pontuacao = pontuacao + pontuacaoMomentanea;
+          arduino.write('5');
+        } else if (rectx==700) {
+          pontuacaoMomentanea =  int((4*multiplicadorRoupa)/7);
+          pontuacao = pontuacao + pontuacaoMomentanea;
+          arduino.write('5');
+        } 
+        counter=0;
+        arduino.write('0');
+      }
 
         numeropainel++;
         print(pontuacao);
@@ -281,10 +297,16 @@ void draw() {
       // 2 botao
       if (message.equals("2") && numeropainel>0) {
         numeropainel=numeropainel-1;
+        pontuacao=pontuacao-pontuacaoMomentanea;
       }
       // 3 botao
       if (message.equals("3") && numeropainel==10) {
         numeropainel=1;
+        pontuacao=0;
+        multiplicadorPessoas=0;
+        multiplicadorDuche=0;
+        multiplicadorLoica=0;
+        multiplicadorRoupa=0;
       }
     }
   }
@@ -293,6 +315,7 @@ void draw() {
 
 void EcraPrincipal() {
   primeiropainel.resize(1080, 700);
+  imageMode(CORNER);
   image(primeiropainel, 0, 0);
   if (frameCount % 40 < 15) {
     fill(#E67334);
